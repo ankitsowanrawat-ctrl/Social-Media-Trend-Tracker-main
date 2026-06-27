@@ -61,7 +61,7 @@ class TrendTrackerDashboard:
     def load_sample_data(self):
         """Load sample data for demonstration"""
         # Generate sample data
-        dates = pd.date_range('2024-01-01', periods=500, freq='H')
+        dates = pd.date_range('2024-01-01', periods=500, freq='h')
         topics = ['AI', 'Machine Learning', 'Data Science', 'Technology', 'Innovation']
         sentiments = ['positive', 'negative', 'neutral']
         

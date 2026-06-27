@@ -272,7 +272,7 @@ class TrendVisualizer:
 # Example usage
 if __name__ == "__main__":
     # Sample data for testing
-    dates = pd.date_range('2024-01-01', periods=100, freq='D')
+    dates = pd.date_range('2024-01-01', periods=100, freq='d')
     sample_df = pd.DataFrame({
         'Date': dates,
         'Sentiment_Score': np.random.normal(0, 0.5, 100),
