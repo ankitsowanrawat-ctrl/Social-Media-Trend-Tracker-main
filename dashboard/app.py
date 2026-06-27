@@ -6,6 +6,17 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import sys
 import os
+import nltk
+
+# Ensure NLTK resources are available
+def download_nltk_data():
+    resources = ['stopwords', 'vader_lexicon', 'punkt', 'wordnet', 'averaged_perceptron_tagger']
+    for res in resources:
+        try:
+            nltk.data.find(f'tokenizers/{res}') if res == 'punkt' else nltk.data.find(f'corpora/{res}') if res != 'vader_lexicon' else nltk.data.find(f'sentiment/{res}')
+        except LookupError:
+            nltk.download(res, quiet=True)
+download_nltk_data()
 
 # Add parent directory to path to import custom modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
