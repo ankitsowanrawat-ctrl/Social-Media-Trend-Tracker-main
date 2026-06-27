@@ -5,7 +5,6 @@ from sklearn.decomposition import LatentDirichletAllocation, NMF
 from sklearn.cluster import KMeans
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
-from transformers import pipeline
 import matplotlib.pyplot as plt
 import seaborn as sns
 from wordcloud import WordCloud
@@ -17,11 +16,19 @@ import os
 class NLPAnalyzer:
     def __init__(self):
         self.sid = SentimentIntensityAnalyzer()
-        self.sentiment_pipeline = pipeline(
-            "sentiment-analysis",
-            model="distilbert-base-uncased-finetuned-sst-2-english",
-            tokenizer="distilbert-base-uncased-finetuned-sst-2-english"
-        )
+        self._sentiment_pipeline = None
+
+    @property
+    def sentiment_pipeline(self):
+        if self._sentiment_pipeline is None:
+            print("🤖 Loading transformers sentiment-analysis pipeline (this might take a moment)...")
+            from transformers import pipeline
+            self._sentiment_pipeline = pipeline(
+                "sentiment-analysis",
+                model="distilbert-base-uncased-finetuned-sst-2-english",
+                tokenizer="distilbert-base-uncased-finetuned-sst-2-english"
+            )
+        return self._sentiment_pipeline
         
     def analyze_sentiment_vader(self, text):
         """Analyze sentiment using VADER"""
