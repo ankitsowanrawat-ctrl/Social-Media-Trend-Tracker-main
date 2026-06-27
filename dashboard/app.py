@@ -13,7 +13,7 @@ def download_nltk_data():
     resources = ['stopwords', 'vader_lexicon', 'punkt', 'wordnet', 'averaged_perceptron_tagger']
     for res in resources:
         try:
-            nltk.data.find(f'tokenizers/{res}') if res == 'punkt' else nltk.data.find(f'corpora/{res}') if res != 'vader_lexicon' else nltk.data.find(f'sentiment/{res}')
+            _ = nltk.data.find(f'tokenizers/{res}') if res == 'punkt' else nltk.data.find(f'corpora/{res}') if res != 'vader_lexicon' else nltk.data.find(f'sentiment/{res}')
         except LookupError:
             nltk.download(res, quiet=True)
 download_nltk_data()
